@@ -1,19 +1,25 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { UserLoggedInGuard } from './user-logged-in.guard';
+import { TicketComponent } from './Pages/ticket/ticket.component';
+import { LoginPage } from './Pages/login/login.page';
+import { AccountComponent } from './Pages/account/account.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
+    redirectTo: 'account',
+    pathMatch: 'full',
+    canActivate: [UserLoggedInGuard]
   },
   {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
+    path: 'Auth',
+    component: LoginPage
   },
   {
-    path: 'list',
-    loadChildren: () => import('./list/list.module').then(m => m.ListPageModule)
+    path: 'Account',
+    component: AccountComponent,
+    canActivate: [UserLoggedInGuard]
   }
 ];
 
