@@ -5,6 +5,7 @@ import {AuthService} from './services/auth.service';
 import {UserService} from './services/user.service';
 import {map} from 'rxjs/operators';
 import * as jwt_decode from 'jwt-decode';
+import { UserType } from './models/UserType';
 
 @Injectable({
     providedIn: 'root'
@@ -21,7 +22,10 @@ export class UserLoggedInGuard implements CanActivate {
         if(auth === "null" || userId === "null" || userType === "null") {
             this.router.navigate(["Auth"]);
         } else {
-            if(this.isTokenExpired(auth)) this.router.navigate(["Auth"]);
+            if(this.isTokenExpired(auth)) {
+                console.error("expired token !");
+                this.router.navigate(["Auth"]);
+            }
             this.auth.UserId = parseInt(userId, 10);
             this.auth.PlaceId = parseInt(placeId, 10);
             this.auth.UserType = parseInt(userType, 10);

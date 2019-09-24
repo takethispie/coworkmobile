@@ -1,0 +1,7 @@
+{
+  "appId": "com.dustcat.coworkmobile",
+  "appName": "coworkmobile",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www"
+}

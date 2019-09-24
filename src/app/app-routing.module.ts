@@ -8,9 +8,8 @@ import { AccountComponent } from './Pages/account/account.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'account',
+    redirectTo: 'Account',
     pathMatch: 'full',
-    canActivate: [UserLoggedInGuard]
   },
   {
     path: 'Auth',
