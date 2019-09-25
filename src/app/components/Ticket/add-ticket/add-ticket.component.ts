@@ -69,7 +69,7 @@ export class AddTicketComponent implements OnInit {
     ).subscribe({
       next: id => {
         if (id === -1) this.toast.PresentToast("Impossible d'ajouter le ticket");
-        else this.modal.dismiss();
+        else this.modal.dismiss(1);
       },
       error: () => {
         this.toast.PresentToast("Erreur lors de l'ajout");

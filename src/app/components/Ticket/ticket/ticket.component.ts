@@ -12,7 +12,7 @@ import {AlertController, PopoverController} from '@ionic/angular';
 import {UserType} from '../../../models/UserType';
 import {TicketAttribution} from '../../../models/TicketAttribution';
 import {TicketAttributionService} from '../../../services/ticket-attribution.service';
-import {flatMap} from 'rxjs/operators';
+import {flatMap, catchError} from 'rxjs/operators';
 import {of} from 'rxjs';
 import {ChangeStatusPopoverComponent} from '../change-status-popover/change-status-popover.component';
 
@@ -131,6 +131,7 @@ export class TicketComponent implements OnInit {
             attr.StaffId = this.authUser.Id;
             attr.Id = -1;
             this.ticketAttributionService.Create(attr).pipe(
+                catchError(() => of(-1)),
                 flatMap(attrResult => {
                     if(attrResult === -1) return of(-1);
                     this.Ticket.AttributedTo = this.authUser;

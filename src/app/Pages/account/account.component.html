@@ -17,6 +17,9 @@
 </ion-header>
 <ion-content color="dark">
     <ion-progress-bar *ngIf="loading.Loading" type="indeterminate"></ion-progress-bar>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
     <span [ngSwitch]="GetTypeName(auth.UserType)">
         <account-staff [Refresher]="Refresher" *ngSwitchCase="'Staff'"></account-staff>
     </span>

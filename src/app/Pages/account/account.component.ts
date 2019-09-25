@@ -36,6 +36,9 @@ export class AccountComponent {
       const modal = await this.modalCtrl.create({
         component: AddTicketComponent
       });
+      modal.onDidDismiss().then(res => {
+        if(res.data != null && res.data === 1) this.Refresher.next();
+      });
       modal.present();
     }
 
@@ -62,5 +65,11 @@ export class AccountComponent {
           },
         ],
       }).then(alert => alert.present())      
+    }
+
+
+    doRefresh(event) {
+      this.Refresher.next();
+      event.target.complete();
     }
 }
