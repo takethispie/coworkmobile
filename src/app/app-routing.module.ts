@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { UserLoggedInGuard } from './user-logged-in.guard';
-import { TicketComponent } from './Pages/ticket/ticket.component';
 import { LoginPage } from './Pages/login/login.page';
 import { AccountComponent } from './Pages/account/account.component';
 

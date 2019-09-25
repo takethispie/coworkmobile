@@ -5,7 +5,8 @@ import {Ticket} from '../../models/Ticket';
 import {LoadingService} from '../../services/loading.service';
 import {UserType} from '../../models/UserType';
 import {Subject} from 'rxjs';
-import { AlertController, NavController } from '@ionic/angular';
+import { AlertController, NavController, ModalController } from '@ionic/angular';
+import { AddTicketComponent } from 'src/app/components/Ticket/add-ticket/add-ticket.component';
 
 @Component({
     selector: 'app-tab1',
@@ -18,7 +19,8 @@ export class AccountComponent {
     public Tickets: Ticket[];
     public Refresher: Subject<object>;
 
-    constructor(public auth: AuthService, public loading: LoadingService, public alertCtrl: AlertController, public navCtrl: NavController) {
+    constructor(public auth: AuthService, public loading: LoadingService, public alertCtrl: AlertController, 
+                public navCtrl: NavController, public modalCtrl: ModalController) {
         this.Refresher = new Subject<object>();
     }
 
@@ -28,6 +30,13 @@ export class AccountComponent {
 
     GetTypeName(id: number) {
         return UserType[id];
+    }
+
+    async AddTicket() {
+      const modal = await this.modalCtrl.create({
+        component: AddTicketComponent
+      });
+      modal.present();
     }
 
     Disconnect() {
