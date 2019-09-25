@@ -28,7 +28,7 @@ export class AddTicketComponent implements OnInit {
 
   constructor(private addTicketModalCtrl: ModalController, public auth: AuthService, public subService: SubscriptionService,
               public ticketService: TicketService, public toast: ToastService, public load: LoadingService,
-              public ticketWareService: TicketWareService) { }
+              public ticketWareService: TicketWareService, public modal: ModalController) { }
 
   ngOnInit() {
 
@@ -69,7 +69,7 @@ export class AddTicketComponent implements OnInit {
     ).subscribe({
       next: id => {
         if (id === -1) this.toast.PresentToast("Impossible d'ajouter le ticket");
-        else this.ngOnInit();
+        else this.modal.dismiss();
       },
       error: () => {
         this.toast.PresentToast("Erreur lors de l'ajout");
@@ -91,5 +91,10 @@ export class AddTicketComponent implements OnInit {
 
   RemoveAttributedWare() {
     this.SelectedWare = null;
+  }
+
+
+  GoBack() {
+    this.modal.dismiss();
   }
 }
