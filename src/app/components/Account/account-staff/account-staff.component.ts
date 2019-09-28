@@ -16,6 +16,8 @@ export class AccountStaffComponent implements OnInit {
 
   public Tickets: Ticket[];
   @Input() Refresher: Observable<object>;
+  public page = 0;
+  public amount = 30;
 
   constructor(public auth: AuthService, public ticketService: TicketService, public loading: LoadingService, public toast: ToastService) {
   }
@@ -30,7 +32,7 @@ export class AccountStaffComponent implements OnInit {
 
   public LoadData() {
     this.loading.Loading = true;
-    this.ticketService.AllWithState(TicketState.New).subscribe({
+    this.ticketService.All().subscribe({
       next: res => {
         this.Tickets = res;
         this.loading.Loading = false;
