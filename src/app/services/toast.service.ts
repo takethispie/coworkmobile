@@ -15,6 +15,6 @@ export class ToastService {
       showCloseButton,
       closeButtonText
     });
-    toast.present();
+    await toast.present();
   }
 }

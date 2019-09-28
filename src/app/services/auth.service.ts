@@ -4,6 +4,8 @@ import {HttpClient} from "@angular/common/http";
 import {CONTENTJSON} from "../Utils";
 import {User} from '../models/User';
 import {map} from 'rxjs/operators';
+import { UserType } from '../models/UserType';
+import { ToastService } from './toast.service';
 
 @Injectable({
     providedIn: 'root'
@@ -16,7 +18,7 @@ export class AuthService {
     public PlaceId: number;
     public UserType: number;
 
-    constructor(public http: HttpClient) {
+    constructor(public http: HttpClient, public toast: ToastService) {
         this.User = null;
     }
 
@@ -24,6 +26,10 @@ export class AuthService {
         return this.http.post<{user: User, sub: any, auth_token: string}>("api/user/auth", { Email: email, Password: password}, CONTENTJSON).pipe(
             map(res => {
              if(res != null) {
+                 if(res.user.Type != UserType.Staff) {
+                     this.toast.PresentToast("Cette application est réservée au personnel des espaces de coworking !")
+                     return null;
+                 }
                  this.User = res.user;
                  if(res.sub != null) {
                      this.Subscription = res.sub;
