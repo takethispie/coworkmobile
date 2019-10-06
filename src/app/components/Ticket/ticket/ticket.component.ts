@@ -178,7 +178,6 @@ export class TicketComponent implements OnInit {
                 },
                 complete: () => this.loading.Loading = false
             })
-            console.log(TicketState[res.data]);
         });
         pop.present();
     }
